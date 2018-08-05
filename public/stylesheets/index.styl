@@ -1,0 +1,203 @@
+@import url('/fonts/inter-ui/inter-ui.css')
+@import url('/fonts/iosevka/webfont.css')
+
+mainColor = #00D16C
+secondaryColor = #F2F2F2
+trinaryColor = #D1D1D1
+bgColor = #FFFFFF
+mainTextColor = #333333
+secondaryTextColor = #666666
+warningColor = #CC0022
+
+body
+  margin: 0
+  padding: 0
+  font-family: 'Inter UI', sans-serif
+  color: mainTextColor
+  background-color: bgColor
+  background: url('/images/background.png')
+  background-size: 448px
+  background-attachment: fixed
+  background-repeat: repeat
+  background-position: center
+  box-sizing: border-box
+
+.layout-container
+  margin: 0 auto
+  padding: 64px 128px
+  position: relative
+  max-width: 896px
+  min-height: 100vh
+  background: bgColor
+
+header.layout-container__header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  div.logo svg
+    height: 64px
+    width: 78px
+    &.big
+      height: 256px
+      width: 320px
+
+main.layout-container__content
+  margin-top: 32px
+
+button.button
+  margin: 0
+  padding: 8px 32px
+  font-family: 'Iosevka Web', monospace
+  font-weight: 600
+  font-size: 24px
+  border: none
+  border-radius: 8px
+  transition: box-shadow 50ms, background 50ms, color 50ms
+  cursor: pointer
+  outline: 0
+  &--primary
+    background: mainColor
+    color: bgColor
+    box-shadow: 0 4px 8px mainColor
+    &:hover
+      background: lighten(mainColor, 5%)
+      box-shadow: 0 4px 16px lighten(mainColor, 5%)
+    &:active
+      background: lighten(mainColor, 5%)
+      box-shadow: 0 0px 0px lighten(mainColor, 5%)
+    &[disabled]
+      background: darken(mainColor, 25%)
+      color: mainColor
+      border: 2px solid mainColor
+      box-shadow: 0 0px 0px mainColor
+      cursor: not-allowed
+  &--secondary
+    background: secondaryColor
+    color: mainTextColor
+    box-shadow: 0 4px 8px trinaryColor
+    &:hover
+      background: lighten(secondaryColor, 5%)
+      box-shadow: 0 4px 16px trinaryColor
+    &:active
+      background: lighten(secondaryColor, 5%)
+      box-shadow: 0 0px 0px trinaryColor
+    &[disabled]
+      background: darken(secondaryColor, 25%)
+      color: secondaryTextColor
+      border: 2px solid secondaryTextColor
+      box-shadow: 0 0px 0px trinaryColor
+      cursor: not-allowed
+  &--margin-left
+    margin-left: 16px
+  &--margin-right
+    margin-right: 16px
+
+div.post
+  display: flex
+  margin-bottom: 16px
+  .post__author
+    display: flex
+    width: 112px
+    margin-right: 16px
+    align-items: flex-start
+    flex-direction: column
+    .post__author-image
+      height: 64px
+      width: 64px
+      border-radius: 32px
+      background-color: mainColor
+      background-image: url('/images/logo-white.svg')
+      background-size: 40px
+      background-position: center
+      background-repeat: no-repeat
+    .post__author-name
+      width: 100%
+      font-size: 12px
+      font-weight: bold
+      text-align: center
+      line-height: 14px
+  .post__content
+    position: relative
+    width: 100%
+    padding: 16px 16px 0 16px
+    border-radius: 0px 8px 8px 8px
+    background: secondaryColor
+    &.interactive
+      display: flex
+      align-items: center
+      padding: 16px
+    &:before
+      content: ''
+      position: absolute
+      height: 0
+      width: 0
+      top: 0
+      left: -16px
+      border-top: 8px solid secondaryColor
+      border-bottom: 8px solid transparent
+      border-left: 8px solid transparent
+      border-right: 8px solid secondaryColor
+      z-index: 2
+    .post__content-text p
+      margin: 0
+      padding: 0
+      font-weight: normal
+      font-size: 18px
+      line-height: 26px
+      white-space: pre-wrap
+      &.interactive
+        font-weight: bold
+        font-size: 48px
+        line-height: initial
+    .post__content-footer
+      display: flex
+      margin-top: 8px
+      margin-bottom: 4px
+      height: 48px
+      justify-content: space-between
+      align-items: center
+      span
+        vertical-align: center
+        color: secondaryTextColor
+        margin: 0
+      svg
+        fill: secondaryTextColor
+      .post__age
+        display: flex
+        align-items: center
+        span
+          margin-left: 8px
+          font-size: 18px
+      .post__buttons
+        display: flex
+        .post__button
+          margin-left: 16px
+          display: flex
+          flex-direction: column
+          align-items: center
+          cursor: pointer
+          svg
+            height: 24px
+            width: 24px
+          span
+            margin-top: -2px
+            font-weight: bold
+            font-size: 12px
+          &:hover
+            svg
+              fill: lighten(secondaryTextColor, 30%)
+            span
+              color: lighten(secondaryTextColor, 30%)
+
+.background-gradient
+  background: linear-gradient(90deg, transparent, mainColor, mainColor, transparent)
+  position: fixed
+  top: 0
+  left: 0
+  margin: 0
+  padding: 0
+  height: 100%
+  width: 100%
+  z-index: -1
+
+// @TODO: Breakpoints
