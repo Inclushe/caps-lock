@@ -6,12 +6,12 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
 ### Main Controller
 
-- [ ] Create Non-Logged In Page
+- [X] Create Non-Logged In Page
 - [ ] Create Logged In Page
 
 ### User
 
-- [ ] Create User Table
+- [X] Create User Table
 - [ ] Create User Route
   - [ ] Create Create User Page
   - [ ] Validate Input

@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter UI', sans-serif;
+  min-height: 100%;
   color: #333;
   background-color: #fff;
   background: url("/images/background.png");
@@ -18,7 +19,7 @@ body {
   padding: 64px 128px;
   position: relative;
   max-width: 896px;
-  min-height: 100vh;
+  min-height: calc(100vh - 128px);
   background: #fff;
 }
 header.layout-container__header {
@@ -30,12 +31,52 @@ header.layout-container__header div.logo svg {
   height: 64px;
   width: 78px;
 }
-header.layout-container__header div.logo svg.big {
-  height: 256px;
-  width: 320px;
-}
 main.layout-container__content {
   margin-top: 32px;
+}
+main.layout-container__content .sign-up-row {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+main.layout-container__content .sign-up-row a {
+  flex-grow: 1;
+}
+main.layout-container__content .sign-up-row button.button {
+  padding: 16px 0;
+  width: 100%;
+}
+main.layout-container__content .sign-up-row span {
+  padding: 0 32px;
+  font-family: 'Iosevka Web', monospace;
+  font-size: 24px;
+}
+main.layout-container__content h2.section-header {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 48px;
+  box-shadow: 0 10px 0 #00d16c;
+}
+footer.layout-container__footer {
+  margin-top: 64px;
+}
+footer.layout-container__footer hr {
+  display: inline-block;
+  text-align: left;
+  height: 4px;
+  width: 64px;
+  background: #666;
+}
+footer.layout-container__footer p {
+  white-space: pre-wrap;
+  font-family: Inter UI;
+  font-weight: bold;
+  line-height: 27px;
+  font-size: 18px;
+  color: #666;
 }
 button.button {
   margin: 0;
@@ -47,6 +88,7 @@ button.button {
   border-radius: 8px;
   transition: box-shadow 50ms, background 50ms, color 50ms;
   cursor: pointer;
+  user-select: none;
   outline: 0;
 }
 button.button--primary {
@@ -75,11 +117,11 @@ button.button--secondary {
   box-shadow: 0 4px 8px #d1d1d1;
 }
 button.button--secondary:hover {
-  background: #f3f3f3;
+  background: #f5f5f5;
   box-shadow: 0 4px 16px #d1d1d1;
 }
 button.button--secondary:active {
-  background: #f3f3f3;
+  background: #f5f5f5;
   box-shadow: 0 0px 0px #d1d1d1;
 }
 button.button--secondary[disabled] {
@@ -88,6 +130,10 @@ button.button--secondary[disabled] {
   border: 2px solid #666;
   box-shadow: 0 0px 0px #d1d1d1;
   cursor: not-allowed;
+}
+button.button--big {
+  font-size: 36px;
+  padding: 16px 128px;
 }
 button.button--margin-left {
   margin-left: 16px;
@@ -112,7 +158,7 @@ div.post .post__author .post__author-image {
   border-radius: 32px;
   background-color: #00d16c;
   background-image: url("/images/logo-white.svg");
-  background-size: 40px;
+  background-size: 42px;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -133,7 +179,7 @@ div.post .post__content {
 div.post .post__content.interactive {
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 32px;
 }
 div.post .post__content:before {
   content: '';

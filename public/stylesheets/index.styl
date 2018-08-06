@@ -13,6 +13,7 @@ body
   margin: 0
   padding: 0
   font-family: 'Inter UI', sans-serif
+  min-height: 100%
   color: mainTextColor
   background-color: bgColor
   background: url('/images/background.png')
@@ -27,7 +28,7 @@ body
   padding: 64px 128px
   position: relative
   max-width: 896px
-  min-height: 100vh
+  min-height: calc(100vh - 128px)
   background: bgColor
 
 header.layout-container__header
@@ -37,12 +38,46 @@ header.layout-container__header
   div.logo svg
     height: 64px
     width: 78px
-    &.big
-      height: 256px
-      width: 320px
 
 main.layout-container__content
   margin-top: 32px
+  .sign-up-row
+    margin-top: 32px
+    display: flex
+    align-items: center
+    width: 100%
+    a
+      flex-grow: 1
+    button.button
+      padding: 16px 0
+      width: 100%
+    span
+      padding: 0 32px
+      font-family: 'Iosevka Web', monospace
+      font-size: 24px
+  h2.section-header
+      display: inline-block
+      margin: 0
+      padding: 0
+      font-weight: bold
+      font-size: 48px
+      box-shadow: 0 10px 0 mainColor
+
+footer.layout-container__footer
+  margin-top: 64px
+  hr
+    display: inline-block
+    text-align: left
+    height: 4px
+    width: 64px
+    background: secondaryTextColor
+  p
+    white-space: pre-wrap
+    font-family: Inter UI
+    font-weight: bold
+    line-height: 27px
+    font-size: 18px
+    color: #666666
 
 button.button
   margin: 0
@@ -54,6 +89,7 @@ button.button
   border-radius: 8px
   transition: box-shadow 50ms, background 50ms, color 50ms
   cursor: pointer
+  user-select: none
   outline: 0
   &--primary
     background: mainColor
@@ -76,10 +112,10 @@ button.button
     color: mainTextColor
     box-shadow: 0 4px 8px trinaryColor
     &:hover
-      background: lighten(secondaryColor, 5%)
+      background: lighten(secondaryColor, 25%)
       box-shadow: 0 4px 16px trinaryColor
     &:active
-      background: lighten(secondaryColor, 5%)
+      background: lighten(secondaryColor, 25%)
       box-shadow: 0 0px 0px trinaryColor
     &[disabled]
       background: darken(secondaryColor, 25%)
@@ -87,6 +123,9 @@ button.button
       border: 2px solid secondaryTextColor
       box-shadow: 0 0px 0px trinaryColor
       cursor: not-allowed
+  &--big
+    font-size: 36px
+    padding: 16px 128px
   &--margin-left
     margin-left: 16px
   &--margin-right
@@ -107,7 +146,7 @@ div.post
       border-radius: 32px
       background-color: mainColor
       background-image: url('/images/logo-white.svg')
-      background-size: 40px
+      background-size: 42px
       background-position: center
       background-repeat: no-repeat
     .post__author-name
@@ -125,7 +164,7 @@ div.post
     &.interactive
       display: flex
       align-items: center
-      padding: 16px
+      padding: 32px
     &:before
       content: ''
       position: absolute
