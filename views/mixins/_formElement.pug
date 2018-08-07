@@ -1,0 +1,10 @@
+mixin formElement(type="text", name="", title="", placeholder="", error=false)
+  .form-element(class=error ? 'error' : '')
+    .form-element__title
+      label(for=name).form-element__title-text= title
+    if type == "textarea"
+      textarea.form-element__input(type=type, name=name, id=name, placeholder=placeholder)
+    else
+      input.form-element__input(type=type, name=name, id=name, placeholder=placeholder)
+    .form-element__error
+      p.form-element__error-text ERROR MESSAGE

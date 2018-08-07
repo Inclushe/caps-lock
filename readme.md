@@ -13,7 +13,7 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
 - [X] Create User Table
 - [ ] Create User Route
-  - [ ] Create Create User Page
+  - [X] Create Create User Page
   - [ ] Validate Input
   - [ ] Save User
   - [ ] Send Validation Code

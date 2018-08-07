@@ -21,7 +21,6 @@ body
   background-attachment: fixed
   background-repeat: repeat
   background-position: center
-  box-sizing: border-box
 
 .layout-container
   margin: 0 auto
@@ -55,13 +54,25 @@ main.layout-container__content
       padding: 0 32px
       font-family: 'Iosevka Web', monospace
       font-size: 24px
+  svg
+    fill: mainTextColor
+  h1.page-header
+    display: inline-block
+    margin: 0
+    margin-bottom: 10px
+    padding: 0
+    font-weight: bold
+    font-size: 48px
+    box-shadow: 0 10px 0 mainColor
   h2.section-header
-      display: inline-block
-      margin: 0
-      padding: 0
-      font-weight: bold
-      font-size: 48px
-      box-shadow: 0 10px 0 mainColor
+    display: flex
+    margin: 32px 0
+    padding: 0
+    font-weight: 500
+    font-size: 24px
+    align-items: center
+    span
+      margin-left: 16px
 
 footer.layout-container__footer
   margin-top: 64px
@@ -79,15 +90,16 @@ footer.layout-container__footer
     font-size: 18px
     color: #666666
 
-button.button
+button.button, input.button
   margin: 0
-  padding: 8px 32px
+  padding: 9px 32px
   font-family: 'Iosevka Web', monospace
   font-weight: 600
   font-size: 24px
   border: none
   border-radius: 8px
-  transition: box-shadow 50ms, background 50ms, color 50ms
+  box-sizing: border-box
+  transition: box-shadow 50ms, background 50ms, color 50ms, border 50ms
   cursor: pointer
   user-select: none
   outline: 0
@@ -95,12 +107,15 @@ button.button
     background: mainColor
     color: bgColor
     box-shadow: 0 4px 8px mainColor
+    border: 2px solid mainColor
     &:hover
       background: lighten(mainColor, 5%)
       box-shadow: 0 4px 16px lighten(mainColor, 5%)
+      border: 2px solid lighten(mainColor, 5%)
     &:active
       background: lighten(mainColor, 5%)
       box-shadow: 0 0px 0px lighten(mainColor, 5%)
+      border: 2px solid lighten(mainColor, 5%)
     &[disabled]
       background: darken(mainColor, 25%)
       color: mainColor
@@ -110,13 +125,16 @@ button.button
   &--secondary
     background: secondaryColor
     color: mainTextColor
+    border: 2px solid secondaryColor
     box-shadow: 0 4px 8px trinaryColor
     &:hover
       background: lighten(secondaryColor, 25%)
       box-shadow: 0 4px 16px trinaryColor
+      border: 2px solid lighten(secondaryColor, 25%)
     &:active
       background: lighten(secondaryColor, 25%)
       box-shadow: 0 0px 0px trinaryColor
+      border: 2px solid lighten(secondaryColor, 25%)
     &[disabled]
       background: darken(secondaryColor, 25%)
       color: secondaryTextColor
@@ -131,7 +149,71 @@ button.button
   &--margin-right
     margin-right: 16px
 
-div.post
+form.form
+  display: block
+  .form-element
+    // display: flex
+    // flex-direction: column
+    .form-element__title
+      position: absolute
+      margin: 0
+      margin-top: -12px
+      padding: 0
+      height: 0
+      z-index: 2
+      height: 0
+      .form-element__title-text
+        display: inline-block
+        height: 12px
+        margin: 0
+        margin-left: 16px
+        padding: 0
+        font-weight: bold
+        font-size: 12px
+        background: bgColor
+        box-shadow: 0 0 0 4px bgColor
+    .form-element__input
+      box-sizing: border-box
+      margin: 0
+      padding: 14px
+      height: 48px
+      width: 100%
+      font-family: inherit
+      font-size: 18px
+      border: 2px solid mainTextColor
+      border-radius: 8px
+      &:focus
+        border: 2px solid mainColor
+        outline: 0
+      &:-webkit-autofill
+        background: inherit
+    .form-element__error
+      visibility: hidden
+      p
+        margin: 0
+        margin-top: 8px
+        margin-bottom: 24px
+        font-weight: 500
+        color: warningColor
+    &.error
+      .form-element__title
+        color: warningColor
+      .form-element__input
+        border: 2px solid warningColor
+      .form-element__error
+        visibility: visible
+  .row
+    display: flex
+    flex-direction: row
+    flex-grow: 0
+    width: 100%
+    .form-element
+      width: 100%
+      margin-right: 32px
+    .button
+      height: 48px
+
+.post
   display: flex
   margin-bottom: 16px
   .post__author
@@ -195,12 +277,12 @@ div.post
       height: 48px
       justify-content: space-between
       align-items: center
+      svg
+        fill: secondaryTextColor
       span
         vertical-align: center
         color: secondaryTextColor
         margin: 0
-      svg
-        fill: secondaryTextColor
       .post__age
         display: flex
         align-items: center

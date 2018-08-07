@@ -1,4 +1,4 @@
-include ./mixins/post.pug
+include mixins/_post
 
 <!DOCTYPE html>
 html(lang="en")
@@ -12,7 +12,8 @@ html(lang="en")
     .layout-container
       header.layout-container__header
         .logo
-          include ../public/images/logo.svg
+          a(href="/")
+            include ../public/images/logo.svg
         .buttons
           button.button.button--secondary LOG IN
       block content

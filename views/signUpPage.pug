@@ -1,5 +1,15 @@
 extends layout
 
+include mixins/_icon
+include mixins/_formElement
+
 block content
   main.layout-container__content
-    h2.section-header SIGN UP
+    h1.page-header SIGN UP
+    h2.section-header
+      +icon("mail")
+      span SIGN UP USING YOUR EMAIL
+    form(method="POST" action="/users/create").form
+      .row
+        +formElement("email", "email", "EMAIL ADDRESS", "my@email.com", false)
+        input(type="submit" id="emailSubmit" value="SIGN UP ->").button.button--primary

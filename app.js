@@ -2,6 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var path = require('path')
+var fs = require('fs')
 // var session = require('express-session')
 var expressValidator = require('express-validator')
 var morgan = require('morgan')
@@ -9,6 +10,7 @@ var routes = require('./routes/index')
 var isProduction = process.env.NODE_ENV === 'production'
 var app = express()
 
+app.locals.icon = (name) => fs.readFileSync(`./public/images/icons/round-${name}-24px.svg`)
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -17,7 +19,10 @@ app.use(cookieParser())
 // app.use(session())
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
-app.use(require('stylus').middleware('public'))
+app.use(require('stylus').middleware({
+  src: 'public',
+  compress: true
+}))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', routes)
 app.use((req, res, next) => {
