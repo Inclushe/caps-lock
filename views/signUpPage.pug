@@ -11,5 +11,5 @@ block content
       span SIGN UP USING YOUR EMAIL
     form(method="POST" action="/users/create").form
       .row
-        +formElement("email", "email", "EMAIL ADDRESS", "my@email.com", false)
+        +formElement("email", "email", errors && errors.email ? errors.email.value : "", "EMAIL ADDRESS", "my@email.com", errors && errors.email ? errors.email.msg : false)
         input(type="submit" id="emailSubmit" value="SIGN UP ->").button.button--primary

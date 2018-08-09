@@ -3,20 +3,30 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var path = require('path')
 var fs = require('fs')
-// var session = require('express-session')
+// var knex = require('./helpers').knex
+var session = require('express-session')
+var KnexSessionStore = require('connect-session-knex')(session)
 var expressValidator = require('express-validator')
 var morgan = require('morgan')
 var routes = require('./routes/index')
+require('dotenv').config({path: './vars.env'})
 var isProduction = process.env.NODE_ENV === 'production'
 var app = express()
-
-app.locals.icon = (name) => fs.readFileSync(`./public/images/icons/round-${name}-24px.svg`)
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(expressValidator())
-app.use(cookieParser())
-// app.use(session())
+app.use(cookieParser(process.env.SESSION_SECRET))
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  sameSite: true,
+  saveUninitialized: false,
+  resave: true,
+  secure: isProduction,
+  store: new KnexSessionStore({
+    knex: require('./helpers').knex
+  })
+}))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 app.use(require('stylus').middleware({
@@ -24,6 +34,11 @@ app.use(require('stylus').middleware({
   compress: true
 }))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use((req, res, next) => {
+  res.locals.icon = (name) => fs.readFileSync(`./public/images/icons/round-${name}-24px.svg`)
+  res.locals.user = req.session.user
+  next()
+})
 app.use('/', routes)
 app.use((req, res, next) => {
   var err = new Error('Not Found')

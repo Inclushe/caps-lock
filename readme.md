@@ -2,7 +2,7 @@
 
 RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
-## @TODO
+## TODO:
 
 ### Main Controller
 
@@ -14,9 +14,9 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 - [X] Create User Table
 - [ ] Create User Route
   - [X] Create Create User Page
-  - [ ] Validate Input
-  - [ ] Save User
-  - [ ] Send Validation Code
+  - [X] Validate Input
+  - [X] Save User
+  - [ ] Send Validation Code TODO:
   - [ ] Validate Working Code
   - [ ] Send to Profile Creator Page
   - [ ] Validate Input
@@ -36,8 +36,8 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
 ### Activation Code
 
-- [ ] Create Activation Code Table
-- [ ] Create Activation Code Route
+- [X] Create Activation Code Table
+- [ ] Create Activation Code Route TODO:
   - [ ] Create Page
   - [ ] Validate User Input
   - [ ] Check Valid Code and !Expired
