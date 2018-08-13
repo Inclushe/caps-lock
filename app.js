@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var path = require('path')
 var fs = require('fs')
-// var knex = require('./helpers').knex
+var knex = require('./helpers').knex
 var session = require('express-session')
 var KnexSessionStore = require('connect-session-knex')(session)
 var expressValidator = require('express-validator')
@@ -12,6 +12,7 @@ var routes = require('./routes/index')
 require('dotenv').config({path: './vars.env'})
 var isProduction = process.env.NODE_ENV === 'production'
 var app = express()
+
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -20,7 +21,7 @@ app.use(cookieParser(process.env.SESSION_SECRET))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   sameSite: true,
-  saveUninitialized: false,
+  saveUninitialized: true,
   resave: true,
   secure: isProduction,
   store: new KnexSessionStore({
@@ -36,8 +37,19 @@ app.use(require('stylus').middleware({
 app.use(express.static(path.join(__dirname, 'public')))
 app.use((req, res, next) => {
   res.locals.icon = (name) => fs.readFileSync(`./public/images/icons/round-${name}-24px.svg`)
-  res.locals.user = req.session.user
-  next()
+  console.log(`userId: ${req.session.userId}`)
+  res.locals.user = null
+  if (req.session.userId) {
+    knex('user').where({id: req.session.userId}).first().then(user => {
+      if (user) {
+        res.locals.user = user
+        res.locals.user['avatarURL'] = 'https://www.gravatar.com/avatar/' + require('crypto').createHash('md5').update(user.email).digest('hex')
+      }
+      next()
+    })
+  } else {
+    next()
+  }
 })
 app.use('/', routes)
 app.use((req, res, next) => {

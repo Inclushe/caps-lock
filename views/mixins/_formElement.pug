@@ -1,10 +1,10 @@
-mixin formElement(type="text", name="", value="", title="", placeholder="", error=false)
-  .form-element(class=error ? 'error' : '')
+mixin formElement(options={type: "text", name: "", title: "", placeholder: "", autocomplete: "on"}, errors={})
+  .form-element(class=errors && errors[options.name] ? 'error' : '')
     .form-element__title
-      label(for=name).form-element__title-text= title
-    if type == "textarea"
-      textarea.form-element__input(type=type, name=name, value=value, id=name, placeholder=placeholder)
+      label(for=options.name).form-element__title-text= options.title
+    if options.type == "textarea"
+      textarea.form-element__input(type=options.type, name=options.name, value=errors && errors[options.name] ? errors[options.name].value : "", id=options.name, placeholder=options.placeholder, autocomplete=options.autocomplete)
     else
-      input.form-element__input(type=type, name=name, value=value, id=name, placeholder=placeholder)
+      input.form-element__input(type=options.type, name=options.name, value=errors && errors[options.name] ? errors[options.name].value : "", id=options.name, placeholder=options.placeholder, autocomplete=options.autocomplete)
     .form-element__error
-      p.form-element__error-text= error
+      p.form-element__error-text= errors && errors[options.name] ? errors[options.name].msg : false

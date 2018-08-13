@@ -16,9 +16,9 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
   - [X] Create Create User Page
   - [X] Validate Input
   - [X] Save User
-  - [ ] Send Validation Code TODO:
-  - [ ] Validate Working Code
-  - [ ] Send to Profile Creator Page
+  - [X] Send Validation Code
+  - [X] Validate Working Code
+  - [ ] Send to Profile Creator Page @TODO:
   - [ ] Validate Input
   - [ ] Save Profile and send to homepage
 - [ ] Log In User Route
@@ -37,11 +37,11 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 ### Activation Code
 
 - [X] Create Activation Code Table
-- [ ] Create Activation Code Route TODO:
-  - [ ] Create Page
-  - [ ] Validate User Input
-  - [ ] Check Valid Code and !Expired
-- [ ] Read Activation Code Route
+- [X] Create Activation Code Route
+  - [X] Create Page
+  - [X] Validate User Input
+  - [X] Check Valid Code and !Expired
+- [ ] Refactor to work with different actions @TODO:
 
 ### Post
 
@@ -72,3 +72,7 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 - [ ] Create Repost Route
 - [ ] Read Repost Route
 - [ ] Delete Repost Route
+
+### Email
+
+- [ ] Reformat email

@@ -1,5 +1,3 @@
-include mixins/_post
-
 <!DOCTYPE html>
 html(lang="en")
   head
@@ -17,8 +15,11 @@ html(lang="en")
         .buttons
           if !user
             button.button.button--secondary LOG IN
+          if user && user.activated
+            img(src=user.avatarURL)
       block content
         p Hello world!
       if process.env.NODE_ENV !== 'production'
         pre.code= JSON.stringify(user, null, 2)
+        pre.code= JSON.stringify(errors, null, 2)
     .background-gradient

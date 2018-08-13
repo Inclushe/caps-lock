@@ -2,8 +2,12 @@ var {check, validationResult} = require('express-validator/check')
 var uuid = require('uuid/v4')
 var getUniqueId = require('../helpers').getUniqueID
 var knex = require('../helpers').knex
+var mail = require('../helpers/mail')
+var util = require('util')
+var promisify = util.promisify
 
 exports.renderSignUpPage = (req, res) => {
+  // req.session.userId = null
   res.render('signUpPage')
 }
 
@@ -31,8 +35,11 @@ exports.showErrorsIfAny = (req, res, next) => {
   }
 }
 
+
+// @TODO: Clean up
 exports.createUser = (req, res, next) => {
   var userId
+  var code = uuid()
   getUniqueId('user', 'id')
     .then((id) => {
       userId = id
@@ -51,20 +58,29 @@ exports.createUser = (req, res, next) => {
         .insert({
           id: id,
           user_id: userId,
-          code: uuid(),
+          code: code,
           action: 'activate',
           created_at: Date.now(),
           updated_at: Date.now()
         })
     })
+    .then(() =>
+      mail.send({
+        user: {
+          email: req.body.email
+        },
+        subject: 'Yo. Here\'s the code.',
+        html: `<h1>Code: ${code}</h1>`,
+        text: `<h1>Code: ${code}</h1>`
+      }))
     .then(() => {
-      return knex('user')
-        .where({id: userId})
-        .then((row) => {
-          req.session.user = row[0]
-          console.log(req.session.user)
-          res.render('verify', {action: 'activate', user: row[0]})
-        })
+      req.session.userId = userId
+      // return promisify(req.session.save)
+      req.session.save(function (err) {
+        if (err) next(err)
+        console.log(req.session)
+        res.redirect('/verify/activate')
+      })
     })
     .catch((e) => {
       console.error(e)
