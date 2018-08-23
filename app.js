@@ -37,6 +37,7 @@ app.use(require('stylus').middleware({
 app.use(express.static(path.join(__dirname, 'public')))
 app.use((req, res, next) => {
   res.locals.icon = (name) => fs.readFileSync(`./public/images/icons/round-${name}-24px.svg`)
+  res.locals.email = req.session.email
   console.log(`userId: ${req.session.userId}`)
   res.locals.user = null
   if (req.session.userId) {

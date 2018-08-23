@@ -5,7 +5,7 @@ include mixins/_formElement
 block content
   main.layout-container__content
     h1.page-header VERIFY ACCOUNT
-    p.body-paragraph!= `TO ACTIVATE YOUR ACCOUNT, ENTER THE VERIFICATION CODE SENT TO <b>${user.email.toUpperCase()}</b> BELOW.`
+    p.body-paragraph!= `TO ACTIVATE YOUR ACCOUNT, ENTER THE VERIFICATION CODE SENT TO <b>${email.toUpperCase()}</b> BELOW.`
     form(method="POST").form
       .row
         +formElement({

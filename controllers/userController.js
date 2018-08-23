@@ -3,8 +3,8 @@ var uuid = require('uuid/v4')
 var getUniqueId = require('../helpers').getUniqueID
 var knex = require('../helpers').knex
 var mail = require('../helpers/mail')
-var util = require('util')
-var promisify = util.promisify
+// var util = require('util')
+// var promisify = util.promisify
 
 exports.renderSignUpPage = (req, res) => {
   // req.session.userId = null
@@ -35,11 +35,9 @@ exports.showErrorsIfAny = (req, res, next) => {
   }
 }
 
-
 // @TODO: Clean up
 exports.createUser = (req, res, next) => {
   var userId
-  var code = uuid()
   getUniqueId('user', 'id')
     .then((id) => {
       userId = id
@@ -58,23 +56,24 @@ exports.createUser = (req, res, next) => {
         .insert({
           id: id,
           user_id: userId,
-          code: code,
           action: 'activate',
           created_at: Date.now(),
           updated_at: Date.now()
         })
+        .returning('id')
     })
-    .then(() =>
+    .then((id) =>
       mail.send({
         user: {
           email: req.body.email
         },
         subject: 'Yo. Here\'s the code.',
-        html: `<h1>Code: ${code}</h1>`,
-        text: `<h1>Code: ${code}</h1>`
+        html: `<h1>id: ${id}</h1>`,
+        text: `<h1>id: ${id}</h1>`
       }))
     .then(() => {
-      req.session.userId = userId
+      // req.session.userId = userId
+      req.session.email = req.body.email
       // return promisify(req.session.save)
       req.session.save(function (err) {
         if (err) next(err)

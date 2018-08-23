@@ -14,14 +14,19 @@ exports.validateCode = [
   check('verificationCode').isUUID(4).withMessage('INVALID CODE'),
   check('verificationCode').custom((value, {req}) => {
     return knex('verification_code')
-      .where({code: value})
+      .where({id: value})
       .first()
       .then((code) => {
         // console.log(code)
         // Check if user matches user in db
-        if (req.session.userId !== code.user_id) {
-          return Promise.reject(new Error('INVALID CODE'))
-        }
+        knex('user')
+          .where({id: code.user_id})
+          .first()
+          .then((user) => {
+            if (req.session.email !== user.email) {
+              return Promise.reject(new Error('INVALID CODE'))
+            }
+          })
         // Check if code action matches action in url
         if (req.params.action !== code.action) {
           return Promise.reject(new Error('INVALID CODE'))
@@ -46,16 +51,22 @@ exports.showErrorsIfAny = (req, res, next) => {
 
 exports.runAction = (req, res, next) => {
   knex('verification_code')
-    .where({code: req.body.verificationCode})
+    .where({id: req.body.verificationCode})
+    .first()
+    .returning('user_id')
     .del()
-    .then(() => {
+    .then((userId) => {
       switch (req.params.action) {
         case 'activate':
           knex('user')
-            .where({id: req.session.userId})
+            .where({id: userId[0]})
             .update({activated: true, updated_at: Date.now()})
-            .then(() => {
-              res.redirect('/')
+            .then((user) => {
+              req.session.userId = userId[0]
+              req.session.save(function (err) {
+                if (err) next(err)
+                res.redirect('/')
+              })
             })
             .catch((e) => {
               console.error(e)
