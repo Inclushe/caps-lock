@@ -3,17 +3,16 @@ extends layout
 include mixins/_formElement
 
 block content
-  main.layout-container__content
-    h1.page-header VERIFY ACCOUNT
-    p.body-paragraph!= `TO ACTIVATE YOUR ACCOUNT, ENTER THE VERIFICATION CODE SENT TO <b>${email.toUpperCase()}</b> BELOW.`
-    form(method="POST").form
-      .row
-        +formElement({
-          type: "text",
-          name: "verificationCode",
-          value: errors && errors.verificationCode ? errors.verificationCode.value : "",
-          title: "VERIFICATION CODE",
-          placeholder: "tree-bark-ruff-milk",
-          error: errors && errors.verificationCode ? errors.verificationCode.msg : false
-        }, errors)
-        input(type="submit" id="verifySubmit" value="VERIFY ->").button.button--primary
+  h1.page-header VERIFY ACCOUNT
+  p.body-paragraph!= `TO ACTIVATE YOUR ACCOUNT, ENTER THE VERIFICATION CODE SENT TO <b>${email.toUpperCase()}</b> BELOW.`
+  form(method="POST").form
+    .row
+      +formElement({
+        type: "text",
+        name: "verificationCode",
+        value: errors && errors.verificationCode ? errors.verificationCode.value : "",
+        title: "VERIFICATION CODE",
+        placeholder: "tree-bark-ruff-milk",
+        error: errors && errors.verificationCode ? errors.verificationCode.msg : false
+      }, errors)
+      input(type="submit" id="verifySubmit" value="VERIFY ->").button.button--primary

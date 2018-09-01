@@ -4,17 +4,16 @@ include mixins/_icon
 include mixins/_formElement
 
 block content
-  main.layout-container__content
-    h1.page-header SIGN UP
-    h2.section-header
-      +icon("mail")
-      span SIGN UP USING YOUR EMAIL
-    form(method="POST" action="/users/create").form
-      .row
-        +formElement({
-          type: "email",
-          name: "email",
-          title: "EMAIL ADDRESS",
-          placeholder: "my@email.com"
-        }, errors)
-        input(type="submit" id="emailSubmit" value="SIGN UP ->").button.button--primary
+  h1.page-header SIGN UP
+  h2.section-header
+    +icon("mail")
+    span SIGN UP USING YOUR EMAIL
+  form(method="POST" action="/users/create").form
+    .row
+      +formElement({
+        type: "email",
+        name: "email",
+        title: "EMAIL ADDRESS",
+        placeholder: "my@email.com"
+      }, errors)
+      input(type="submit" id="emailSubmit" value="SIGN UP ->").button.button--primary

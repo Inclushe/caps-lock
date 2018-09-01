@@ -16,9 +16,10 @@ html(lang="en")
           if !user
             button.button.button--secondary LOG IN
           if user && user.activated
-            img(src=user.avatarURL)
-      block content
-        p Hello world!
+            img.avatar(src=user.avatarURL)
+      main.layout-container__content
+        block content
+          p Hello world!
       if process.env.NODE_ENV !== 'production'
         pre.code= JSON.stringify(user, null, 2)
         pre.code= JSON.stringify(errors, null, 2)

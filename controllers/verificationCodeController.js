@@ -12,15 +12,15 @@ exports.renderVerifyPage = (req, res) => {
 
 exports.validateCode = [
   check('verificationCode').isUUID(4).withMessage('INVALID CODE'),
-  check('verificationCode').custom((value, {req}) => {
+  check('verificationCode').custom((value, { req }) => {
     return knex('verification_code')
-      .where({id: value})
+      .where({ id: value })
       .first()
       .then((code) => {
         // console.log(code)
         // Check if user matches user in db
         knex('user')
-          .where({id: code.user_id})
+          .where({ id: code.user_id })
           .first()
           .then((user) => {
             if (req.session.email !== user.email) {

@@ -13,5 +13,6 @@ router.get('/verify/:action', verificationCodeController.renderVerifyPage)
 router.post('/verify/:action', verificationCodeController.validateCode,
                                verificationCodeController.showErrorsIfAny,
                                verificationCodeController.runAction)
+router.get('/test/:page', mainController.viewPage)
 
 module.exports = router

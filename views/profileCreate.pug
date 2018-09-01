@@ -1,0 +1,31 @@
+extends layout
+
+include mixins/_icon
+include mixins/_formElement
+
+block content
+  h1.page-header SET UP YOUR PROFILE
+  form.form(method="POST", action="/users/edit")
+    .profile-editor-block
+      .profile-editor__avatar-block
+        .profile-editor__avatar
+          img.avatar(src=user.avatarURL)
+          h2.section-header
+            +icon("account_circle")
+            span AVATAR
+          p
+            a(href="https://gravatar.com") CHANGE YOUR GRAVATAR ->
+      .profile-editor__input-block
+        +formElement({
+          type: "username",
+          name: "username",
+          title: "USERNAME",
+          placeholder: "GOOD USERNAME"
+        }, errors)
+        +formElement({
+          type: "textarea",
+          name: "description",
+          title: "DESCRIPTION",
+          placeholder: "GOOD DESCRIPTION"
+        }, errors)
+        input(type="submit" id="editSubmit" value="FINISH PROFILE ->").button.button--primary

@@ -3,15 +3,14 @@ extends layout
 include mixins/_post
 
 block content
-  main.layout-container__content
-    +post("", "RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS", true)
-    +post("", "ALL CAPS ONLY", true)
-    div.sign-up-row
-      a(href="/sign-up")
-        button.button.button--primary.button--big SIGN UP
-      span OR
-      a(href="/log-in")
-        button.button.button--secondary.button--big LOG IN
+  +post("", "RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS", true)
+  +post("", "ALL CAPS ONLY", true)
+  div.sign-up-row
+    a(href="/sign-up")
+      button.button.button--primary.button--big SIGN UP
+    span OR
+    a(href="/log-in")
+      button.button.button--secondary.button--big LOG IN
   footer.layout-container__footer
     hr
     p.
