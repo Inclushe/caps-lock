@@ -1,6 +1,6 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('verification_code', (table) => {
-    table.uuid('id').primary().notNullable()
+    table.uuid('code').primary().notNullable()
     table.uuid('user_id').notNullable()
     table.string('action').notNullable()
     table.bigInteger('created_at').unsigned().notNullable()
