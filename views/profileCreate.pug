@@ -1,17 +1,16 @@
 extends layout
 
-include mixins/_icon
 include mixins/_formElement
 
 block content
   h1.page-header SET UP YOUR PROFILE
-  form.form(method="POST", action="/users/edit")
+  form.form(method="POST")
     .profile-editor-block
       .profile-editor__avatar-block
         .profile-editor__avatar
-          img.avatar(src=user.avatarURL)
+          img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=192'} 1x, ${user.avatarURL+'?s=384'} 2x`)
           h2.section-header
-            +icon("account_circle")
+            include ../public/images/icons/round-account_circle-24px.svg
             span AVATAR
           p
             a(href="https://gravatar.com") CHANGE YOUR GRAVATAR ->
@@ -20,12 +19,15 @@ block content
           type: "username",
           name: "username",
           title: "USERNAME",
-          placeholder: "GOOD USERNAME"
+          placeholder: "GOOD USERNAME",
+          uppercase: true,
+          monospace: true
         }, errors)
         +formElement({
           type: "textarea",
           name: "description",
           title: "DESCRIPTION",
-          placeholder: "GOOD DESCRIPTION"
+          placeholder: "GOOD DESCRIPTION",
+          uppercase: true
         }, errors)
         input(type="submit" id="editSubmit" value="FINISH PROFILE ->").button.button--primary

@@ -8,17 +8,22 @@ router.get('/', mainController.renderHomePage)
 router.get('/sign-up', mainController.renderSignUpPage)
 router.post('/sign-up',
   mainController.validateEmail,
-  mainController.showErrorsIfAny,
   userController.createUser,
   verificationCodeController.createCode
 )
 router.get('/verify', verificationCodeController.renderVerifyPage)
 router.post('/verify',
   verificationCodeController.verifyCode,
-  verificationCodeController.showErrorsIfAny,
   verificationCodeController.runAction
 )
-router.get('/profile/create', userController.renderProfileCreatePage)
+router.get('/profile/create',
+  userController.isNotSetup,
+  userController.renderProfileCreatePage
+)
+router.post('/profile/create',
+  userController.validateProfile,
+  userController.createProfile
+)
 router.get('/test/:page', mainController.viewPage)
 
 module.exports = router

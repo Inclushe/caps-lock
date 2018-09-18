@@ -1,12 +1,11 @@
 extends layout
 
-include mixins/_icon
 include mixins/_formElement
 
 block content
   h1.page-header SIGN UP
   h2.section-header
-    +icon("mail")
+    include ../public/images/icons/round-mail-24px.svg
     span SIGN UP USING YOUR EMAIL
   form(method="POST").form
     .row

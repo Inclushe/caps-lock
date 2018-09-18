@@ -19,13 +19,3 @@ exports.validateEmail = [
       })
   })
 ]
-
-exports.showErrorsIfAny = (req, res, next) => {
-  var errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    console.log(errors.mapped())
-    res.render('signUpPage', { errors: errors.mapped() })
-  } else {
-    next()
-  }
-}

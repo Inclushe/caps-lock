@@ -2,7 +2,6 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var path = require('path')
-var fs = require('fs')
 var knex = require('./helpers').knex
 var session = require('express-session')
 var KnexSessionStore = require('connect-session-knex')(session)
@@ -14,10 +13,14 @@ var isProduction = process.env.NODE_ENV === 'production'
 var app = express()
 
 app.use(morgan('dev'))
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
 app.use(expressValidator())
+
 app.use(cookieParser(process.env.SESSION_SECRET))
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   sameSite: true,
@@ -28,15 +31,19 @@ app.use(session({
     knex: require('./helpers').knex
   })
 }))
+
 app.set('views', path.join(__dirname, 'views'))
+
 app.set('view engine', 'pug')
+
 app.use(require('stylus').middleware({
   src: 'public',
   compress: true
 }))
+
 app.use(express.static(path.join(__dirname, 'public')))
+
 app.use((req, res, next) => {
-  res.locals.icon = (name) => fs.readFileSync(`./public/images/icons/round-${name}-24px.svg`)
   res.locals.email = req.session.email
   console.log({ id: req.session.user })
   res.locals.user = null
@@ -52,12 +59,15 @@ app.use((req, res, next) => {
     next()
   }
 })
+
 app.use('/', routes)
+
 app.use((req, res, next) => {
   var err = new Error('Not Found')
   err.status = 404
   next(err)
 })
+
 app.use((err, req, res, next) => {
   // console.log(err.stack)
   res.status(err.status || 500)

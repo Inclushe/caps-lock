@@ -64,38 +64,34 @@ exports.verifyCode = [
   })
 ]
 
-exports.showErrorsIfAny = (req, res, next) => {
+exports.runAction = (req, res, next) => {
   var errors = validationResult(req)
   if (!errors.isEmpty()) {
     console.log(errors.mapped())
     res.render('verify', { errors: errors.mapped() })
   } else {
-    next()
-  }
-}
-
-exports.runAction = (req, res, next) => {
-  knex('verification_code')
-    .where({ code: req.body.verificationCode })
-    .first()
-    .returning('user_id')
-    .del()
-    .then((userID) => {
-      return knex('user')
-        .where({ id: userID[0] })
-        .update({ activated: true, updated_at: Date.now() })
-        .returning('id')
-    })
-    .then((userID) => {
-      console.log(userID[0])
-      req.session.user = userID[0]
-      req.session.save(function (err) {
-        if (err) next(err)
-        res.redirect('/profile/create')
+    knex('verification_code')
+      .where({ code: req.body.verificationCode })
+      .first()
+      .returning('user_id')
+      .del()
+      .then((userID) => {
+        return knex('user')
+          .where({ id: userID[0] })
+          .update({ activated: true, updated_at: Date.now() })
+          .returning('id')
       })
-    })
-    .catch((e) => {
-      console.error(e)
-      next(e)
-    })
+      .then((userID) => {
+        console.log(userID[0])
+        req.session.user = userID[0]
+        req.session.save(function (err) {
+          if (err) next(err)
+          res.redirect('/profile/create')
+        })
+      })
+      .catch((e) => {
+        console.error(e)
+        next(e)
+      })
+  }
 }

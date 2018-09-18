@@ -2,17 +2,13 @@
 
 RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
-## TODO:
+## @TODO:
 
-### Main Controller
+- [ ] Examine flashes
 
-- [X] Create Non-Logged In Page
 - [ ] Create Logged In Page
 
-### User
-
-- [X] Create User Table
-- [ ] Create User Route
+- [ ] Sign Up User Route
   - [X] Create Create User Page
   - [X] Validate Input
   - [X] Save User
@@ -29,51 +25,14 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
   - [ ] Validate Working Code
   - [ ] Log User in and sent to homepage
 - [ ] Read User Route
-  - [ ] Create Profile Page
 - [ ] Update User Route
-  - [ ] Create Settings Page
 - [ ] Delete User Route
-  - [ ] Create Delete User Page
 
-### Activation Code
+- [ ] Refactor Activation Code to work with different actions @TODO:
 
-- [X] Create Activation Code Table
-- [X] Create Activation Code Route
-  - [X] Create Page
-  - [X] Validate User Input
-  - [X] Check Valid Code and !Expired
-- [ ] Refactor to work with different actions @TODO:
-
-### Post
-
-- [ ] Create Post Table
-- [ ] Create Post Route
-  - [ ] Validate User is Logged in and Activated and !Disabled
-- [ ] Read Post Route
-- [ ] Update Post Route
-- [ ] Delete Post Route
-
-### Follow
-
-- [ ] Create Follow Table
-- [ ] Create Follow Route
-- [ ] Read Follow Route
-- [ ] Delete Follow Route
-
-### Like
-
-- [ ] Create Like Table
-- [ ] Create Like Route
-- [ ] Read Like Route
-- [ ] Delete Like Route
-
-### Repost
-
-- [ ] Create Repost Table
-- [ ] Create Repost Route
-- [ ] Read Repost Route
-- [ ] Delete Repost Route
-
-### Email
+- [ ] Create Post Table and Routes
+- [ ] Create Follow Table and Routes
+- [ ] Create Like Table and Routes
+- [ ] Create Repost Table and Routes
 
 - [ ] Reformat email
