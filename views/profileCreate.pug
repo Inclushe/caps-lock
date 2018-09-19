@@ -8,7 +8,7 @@ block content
     .profile-editor-block
       .profile-editor__avatar-block
         .profile-editor__avatar
-          img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=192'} 1x, ${user.avatarURL+'?s=384'} 2x`)
+          img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=192&d=mp'} 1x, ${user.avatarURL+'?s=384&d=mp'} 2x`)
           h2.section-header
             include ../public/images/icons/round-account_circle-24px.svg
             span AVATAR
@@ -21,7 +21,8 @@ block content
           title: "USERNAME",
           placeholder: "GOOD USERNAME",
           uppercase: true,
-          monospace: true
+          monospace: true,
+          spellcheck: false
         }, errors)
         +formElement({
           type: "textarea",

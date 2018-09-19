@@ -21,7 +21,7 @@ exports.createCode = (req, res, next) => {
         user: {
           email: req.body.email
         },
-        subject: 'CAPS LOCK: Verfication Code',
+        subject: 'CAPS LOCK: Verification Code',
         html: `<h1>Code is ${code}</h1>`,
         text: `Code is ${code}`
       })

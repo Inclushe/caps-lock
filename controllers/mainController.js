@@ -1,5 +1,5 @@
 var knex = require('../helpers').knex
-var { check, validationResult } = require('express-validator/check')
+var { check } = require('express-validator/check')
 var isProduction = process.env.NODE_ENV === 'production'
 
 exports.renderHomePage = (req, res) => res.render('index')

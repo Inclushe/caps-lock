@@ -16,7 +16,7 @@ html(lang="en")
           if !user
             button.button.button--secondary LOG IN
           if user && user.activated
-            img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=64'} 1x, ${user.avatarURL+'?s=128'} 2x`)
+            img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=64&d=mp'} 1x, ${user.avatarURL+'?s=128&d=mp'} 2x`)
       main.layout-container__content
         block content
           p Hello world!
