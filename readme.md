@@ -34,5 +34,6 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 - [ ] Create Follow Table and Routes
 - [ ] Create Like Table and Routes
 - [ ] Create Repost Table and Routes
+- [ ] Create Action Table and Routes (notifications)
 
 - [ ] Reformat email

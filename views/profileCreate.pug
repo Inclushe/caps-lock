@@ -8,7 +8,10 @@ block content
     .profile-editor-block
       .profile-editor__avatar-block
         .profile-editor__avatar
-          img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=192&d=mp'} 1x, ${user.avatarURL+'?s=384&d=mp'} 2x`)
+          if user
+            img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=192&d=mp'} 1x, ${user.avatarURL+'?s=384&d=mp'} 2x`)
+          else
+            img.avatar(src="https://www.gravatar.com/avatar/4e77c3b74325f68fbe98f94c2e9b70e0?s=192&d=mp", srcset="https://www.gravatar.com/avatar/4e77c3b74325f68fbe98f94c2e9b70e0?s=192&d=mp 1x, https://www.gravatar.com/avatar/4e77c3b74325f68fbe98f94c2e9b70e0?s=384&d=mp 2x")
           h2.section-header
             include ../public/images/icons/round-account_circle-24px.svg
             span AVATAR

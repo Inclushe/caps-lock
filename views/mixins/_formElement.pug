@@ -3,7 +3,7 @@ mixin formElement(options={type: "text", name: "", title: "", placeholder: "", a
     .form-element__title
       label(for=options.name).form-element__title-text!= options.title + (options.uppercase ? '  <span class="caps-dot"> 🞄 CAPS ON</span>' : '')
     if options.type == "textarea"
-      textarea(type=options.type, name=options.name, value=errors && errors[options.name] ? errors[options.name].value : "", id=options.name, placeholder=options.placeholder, autocomplete=options.autocomplete, spellcheck=`${options.spellcheck}`, class=`form-element__input ${options.uppercase ? 'uppercase' : ''} ${options.monospace ? 'monospace' : ''}`)
+      textarea(name=options.name, value=errors && errors[options.name] ? errors[options.name].value : "", id=options.name, placeholder=options.placeholder, autocomplete=options.autocomplete, spellcheck=`${options.spellcheck}`, class=`form-element__input ${options.uppercase ? 'uppercase' : ''} ${options.monospace ? 'monospace' : ''}`)
     else
       input(type=options.type, name=options.name, value=errors && errors[options.name] ? errors[options.name].value : "", id=options.name, placeholder=options.placeholder, autocomplete=options.autocomplete, spellcheck=`${options.spellcheck}`, class=`form-element__input ${options.uppercase ? 'uppercase' : ''} ${options.monospace ? 'monospace' : ''}`)
     .form-element__error
