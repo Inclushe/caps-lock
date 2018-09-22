@@ -28,12 +28,13 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 - [ ] Update User Route
 - [ ] Delete User Route
 
-- [ ] Refactor Activation Code to work with different actions @TODO:
-
 - [ ] Create Post Table and Routes
+
+- [ ] Refactor Activation Code to work with different actions @TODO:
+- [ ] Make email sign up easier
+- [ ] Reformat email
+
 - [ ] Create Follow Table and Routes
 - [ ] Create Like Table and Routes
 - [ ] Create Repost Table and Routes
 - [ ] Create Action Table and Routes (notifications)
-
-- [ ] Reformat email

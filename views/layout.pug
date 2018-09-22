@@ -5,6 +5,15 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     link(rel="stylesheet", href="/public/stylesheets/index.css")
+    link(rel="stylesheet", href="/public/fonts/inter-ui/inter-ui.css")
+    link(rel="stylesheet", href="/public/fonts/iosevka/webfont.css")
+    link(rel="preload", href="/public/stylesheets/index.css", as="style")
+    link(rel="preload", href="/public/fonts/inter-ui/inter-ui.css", as="style")
+    link(rel="preload", href="/public/fonts/iosevka/webfont.css", as="style")
+    link(rel="preload", href="/public/fonts/inter-ui/Inter-UI-Bold.woff2", as="font" crossorigin)
+    link(rel="preload", href="/public/fonts/inter-ui/Inter-UI-Regular.woff2", as="font" crossorigin)
+    link(rel="preload", href="/public/fonts/iosevka/woff2/iosevka-regular.woff2", as="font" crossorigin)
+    link(rel="preload", href="/public/fonts/iosevka/woff2/iosevka-bold.woff2", as="font" crossorigin)
     title CAPS LOCK
   body
     .layout-container
@@ -13,7 +22,7 @@ html(lang="en")
           a(href="/")
             include ../public/images/logo.svg
         .buttons
-          if !user
+          if !user && !email
             button.button.button--secondary LOG IN
           if user && user.activated
             img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=64&d=mp'} 1x, ${user.avatarURL+'?s=128&d=mp'} 2x`)
@@ -24,4 +33,5 @@ html(lang="en")
         pre.code= JSON.stringify(user, null, 2)
         pre.code= JSON.stringify(email, null, 2)
         pre.code= JSON.stringify(errors, null, 2)
+        div.project-status WIP
     .background-gradient

@@ -1,6 +1,3 @@
-@import url('/public/fonts/inter-ui/inter-ui.css')
-@import url('/public/fonts/iosevka/webfont.css')
-
 mainColor = #00D16C
 secondaryColor = #F2F2F2
 trinaryColor = #D1D1D1
@@ -8,11 +5,13 @@ bgColor = #FFFFFF
 mainTextColor = #333333
 secondaryTextColor = #666666
 warningColor = #CC0022
+main = 'Inter UI', sans-serif
+mono = 'Iosevka Web', monospace
 
 body
   margin: 0
   padding: 0
-  font-family: 'Inter UI', sans-serif
+  font-family: main
   min-height: 100%
   color: mainTextColor
   background-color: bgColor
@@ -34,9 +33,10 @@ header.layout-container__header
   display: flex
   justify-content: space-between
   align-items: center
-  div.logo svg
-    height: 64px
-    width: 78px
+  div.logo
+    svg
+      height: 64px
+      width: 78px
 
 main.layout-container__content
   margin-top: 32px
@@ -52,7 +52,7 @@ main.layout-container__content
       width: 100%
     span
       padding: 0 32px
-      font-family: 'Iosevka Web', monospace
+      font-family: mono
       font-size: 24px
   svg
     fill: mainTextColor
@@ -95,8 +95,8 @@ footer.layout-container__footer
 button.button, input.button
   margin: 0
   padding: 9px 32px
-  font-family: 'Iosevka Web', monospace
-  font-weight: 600
+  font-family: mono
+  font-weight: bold
   font-size: 24px
   border: none
   border-radius: 8px
@@ -198,7 +198,7 @@ form.form
         margin: 0
         margin-top: 8px
         margin-bottom: 24px
-        font-weight: 500
+        font-weight: bold
         color: warningColor
     &.error
       .form-element__title
@@ -338,6 +338,19 @@ form.form
     .button.button--primary
       width: 100%
 
+.project-status
+  position: fixed
+  margin: 16px
+  bottom: 0
+  right: 0
+  font-family: mono
+  font-weight: bold
+  font-size: 32px
+  text-shadow: -2px -2px 0 white,
+               2px -2px 0 white,
+               -2px 2px 0 white,
+               2px 2px 0 white
+
 img.avatar
   border-radius: 50%
   height: 64px
@@ -371,7 +384,7 @@ pre.code
   text-transform: uppercase
 
 .monospace
-  font-family: 'Iosevka Web', monospace !important
+  font-family: mono !important
 
 .caps-dot
   color: mainColor
