@@ -2,7 +2,15 @@ var knex = require('../helpers').knex
 var { check } = require('express-validator/check')
 var isProduction = process.env.NODE_ENV === 'production'
 
-exports.renderHomePage = (req, res) => res.render('index')
+exports.renderHomePage = (req, res) => {
+  if (res.locals.user === null) {
+    res.render('index')
+  } else if (res.locals.user.setup === false) {
+    res.redirect('/')
+  } else {
+    res.render('indexLoggedIn')
+  }
+}
 exports.renderSignUpPage = (req, res) => res.render('signUpPage')
 exports.viewPage = (req, res, next) =>
   !isProduction ? res.render(req.params.page) : next(404)

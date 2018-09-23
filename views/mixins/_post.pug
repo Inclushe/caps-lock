@@ -2,8 +2,6 @@ mixin post(author="CAPS LOCK", text="RANT OR RAVE IN A THOUSAND CHARACTERS OR LE
   .post
     .post__author
       .post__author-image
-      .post__author-name
-        p= author
     if interactive
       .post__content.interactive
         .post__content-text
@@ -11,6 +9,8 @@ mixin post(author="CAPS LOCK", text="RANT OR RAVE IN A THOUSAND CHARACTERS OR LE
     else
       .post__content
         if interactive
+        .post__content-header
+          p= author + ' SAID'
         .post__content-text
           p= text
         .post__content-footer

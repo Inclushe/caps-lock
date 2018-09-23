@@ -1,0 +1,100 @@
+@import _vars
+
+.post
+  display: flex
+  margin-bottom: 16px
+  .post__author
+    display: flex
+    width: 112px
+    margin-right: 16px
+    align-items: flex-start
+    flex-direction: column
+    .post__author-image
+      height: 64px
+      width: 64px
+      border-radius: 32px
+      background-color: mainColor
+      background-image: url('/public/images/logo-white.svg')
+      background-size: 42px
+      background-position: center
+      background-repeat: no-repeat
+  .post__content
+    position: relative
+    width: 100%
+    padding: 32px 16px 0 16px
+    border-radius: 0px 8px 8px 8px
+    background: secondaryColor
+    &.interactive
+      display: flex
+      align-items: center
+      padding: 32px
+    &:before
+      content: ''
+      position: absolute
+      height: 0
+      width: 0
+      top: 0
+      left: -16px
+      border-top: 8px solid secondaryColor
+      border-bottom: 8px solid transparent
+      border-left: 8px solid transparent
+      border-right: 8px solid secondaryColor
+      z-index: 2
+    .post__content-header
+      position: absolute
+      top: 0px
+      font-size: 12px
+      font-weight: bold
+      text-align: left
+      line-height: 14px
+      color: secondaryTextColor
+    .post__content-text p
+      margin: 0
+      padding: 0
+      font-weight: normal
+      font-size: 18px
+      line-height: 26px
+      white-space: pre-wrap
+      &.interactive
+        font-weight: bold
+        font-size: 48px
+        line-height: initial
+    .post__content-footer
+      display: flex
+      margin-top: 8px
+      margin-bottom: 4px
+      height: 48px
+      justify-content: space-between
+      align-items: center
+      svg
+        fill: secondaryTextColor
+      span
+        vertical-align: center
+        color: secondaryTextColor
+        margin: 0
+      .post__age
+        display: flex
+        align-items: center
+        span
+          margin-left: 8px
+          font-size: 18px
+      .post__buttons
+        display: flex
+        .post__button
+          margin-left: 16px
+          display: flex
+          flex-direction: column
+          align-items: center
+          cursor: pointer
+          svg
+            height: 24px
+            width: 24px
+          span
+            margin-top: -2px
+            font-weight: bold
+            font-size: 18px
+          &:hover
+            svg
+              fill: lighten(secondaryTextColor, 30%)
+            span
+              color: lighten(secondaryTextColor, 30%)

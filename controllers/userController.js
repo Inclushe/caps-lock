@@ -58,12 +58,26 @@ exports.validateProfile = [
   check('description').trim().isLength({ min: 0, max: 1000 }).withMessage('DESCRIPTION IS OVER 1000 CHARACTERS')
 ]
 
-exports.createProfile = (req, res) => {
+exports.createProfile = (req, res, next) => {
   var errors = validationResult(req)
   if (!errors.isEmpty()) {
     console.log(errors.mapped())
     res.render('profileCreate', { errors: errors.mapped() })
   } else {
-    res.json(req.body)
+    knex('user')
+      .where({ id: req.session.user })
+      .update({
+        name: req.body.username,
+        description: req.body.description,
+        setup: true,
+        updated_at: Date.now()
+      })
+      .then(() => {
+        res.redirect('/')
+      })
+      .catch((e) => {
+        console.error(e)
+        next(e)
+      })
   }
 }
