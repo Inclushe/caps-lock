@@ -86,7 +86,7 @@ exports.runAction = (req, res, next) => {
         req.session.user = userID[0]
         req.session.save(function (err) {
           if (err) next(err)
-          res.redirect('/profile/create')
+          res.redirect('/')
         })
       })
       .catch((e) => {

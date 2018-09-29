@@ -3,8 +3,13 @@ var router = express.Router()
 var mainController = require('../controllers/mainController')
 var userController = require('../controllers/userController')
 var verificationCodeController = require('../controllers/verificationCodeController')
+var postController = require('../controllers/postController')
 
 router.get('/', mainController.renderHomePage)
+router.post('/',
+  postController.validatePost,
+  postController.createPost
+)
 router.get('/sign-up', mainController.renderSignUpPage)
 router.post('/sign-up',
   mainController.validateEmail,

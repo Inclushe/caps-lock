@@ -7,12 +7,14 @@ var session = require('express-session')
 var KnexSessionStore = require('connect-session-knex')(session)
 var expressValidator = require('express-validator')
 var morgan = require('morgan')
+var compression = require('compression')
 var routes = require('./routes/index')
 require('dotenv').config({ path: './vars.env' })
 var isProduction = process.env.NODE_ENV === 'production'
 var app = express()
 
 app.use(morgan('dev'))
+app.use(compression())
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

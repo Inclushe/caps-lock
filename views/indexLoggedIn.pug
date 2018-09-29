@@ -7,7 +7,7 @@ block content
   form(method="POST").form.form--post
     +formElement({
       type: "textarea",
-      name: "postContent",
+      name: "content",
       title: "POST CONTENT",
       uppercase: true,
       showErrors: false
@@ -16,9 +16,6 @@ block content
       p.form-element__error-text= errors && errors["postContent"] ? errors["postContent"].msg : ""
       input(type="submit" id="postSubmit" value="POST ->").button.button--primary
   div.post-container
-    +post("@LONG_NAME")
-    +post("@REALLY_LONGER_NAME")
-    +post("@CAPS_LOCK")
-    +post()
-    +post()
-    +post()
+    if posts
+      each post in posts
+        +post(post)

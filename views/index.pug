@@ -3,8 +3,9 @@ extends layout
 include mixins/_post
 
 block content
-  +post("", "RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS", true)
-  +post("", "ALL CAPS ONLY", true)
+  
+  +post({ content: 'RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS' }, true)
+  +post({ content: 'ALL CAPS ONLY' }, true)
   div.sign-up-row
     a(href="/sign-up")
       button.button.button--primary.button--big SIGN UP

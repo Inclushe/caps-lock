@@ -6,9 +6,35 @@ exports.renderHomePage = (req, res) => {
   if (res.locals.user === null) {
     res.render('index')
   } else if (res.locals.user.setup === false) {
-    res.redirect('/')
+    res.redirect('/profile/create')
   } else {
-    res.render('indexLoggedIn')
+    knex('post')
+      .orderBy('created_at', 'desc')
+      .limit(20)
+      .then((rows) => {
+        var results = rows.reduce((arr, value) => {
+          var prom = new Promise((resolve, reject) => {
+            knex('user')
+              .where({ id: value.user_id })
+              .first()
+              .then((user) => {
+                value.user = user
+                value.user['avatarURL'] = 'https://www.gravatar.com/avatar/' + require('crypto').createHash('md5').update(user.email).digest('hex')
+                resolve(value)
+              })
+              .catch((e) => {
+                reject(e)
+              })
+          })
+          arr.push(prom)
+          return arr
+        }, [])
+        return Promise.all(results)
+      })
+      .then((rows) => {
+        console.log(rows)
+        res.render('indexLoggedIn', { posts: rows })
+      })
   }
 }
 exports.renderSignUpPage = (req, res) => res.render('signUpPage')

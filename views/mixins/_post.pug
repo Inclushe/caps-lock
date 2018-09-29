@@ -1,29 +1,32 @@
-mixin post(author="CAPS LOCK", text="RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS", interactive=false)
+mixin post(options={}, interactive=false)
   .post
+    //- pre= JSON.stringify(options.user, null, 2)
     .post__author
-      .post__author-image
+      if options.user
+        .post__author-image(style=`background-image: url('${options.user.avatarURL + "?s=384&d=mp"}'); background-size: 100%`)
+      else
+        .post__author-image
     if interactive
       .post__content.interactive
         .post__content-text
-          p.interactive= text
+          p.interactive= options.content
     else
       .post__content
-        if interactive
         .post__content-header
-          p= author + ' SAID'
+          p= options.user.name + ' SAID'
         .post__content-text
-          p= text
+          p= options.content
         .post__content-footer
           .post__age
             include ../../public/images/icons/round-access_time-24px.svg
             span 8 MINUTES AGO
           .post__buttons
-            .post__button.post__button-reply
-              include ../../public/images/icons/round-reply-24px.svg
-              span 4
-            .post__button.post__button-favorite
-              include ../../public/images/icons/round-favorite_border-24px.svg
-              span 103
-            .post__button.post__button-repost
-              include ../../public/images/icons/round-repeat-24px.svg
-              span 23
+            //- .post__button.post__button-reply
+            //-   include ../../public/images/icons/round-reply-24px.svg
+            //-   span 4
+            //- .post__button.post__button-favorite
+            //-   include ../../public/images/icons/round-favorite_border-24px.svg
+            //-   span 103
+            //- .post__button.post__button-repost
+            //-   include ../../public/images/icons/round-repeat-24px.svg
+            //-   span 23

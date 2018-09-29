@@ -4,19 +4,6 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
 ## @TODO:
 
-- [ ] Examine flashes
-
-- [ ] Create Logged In Page
-
-- [ ] Sign Up User Route
-  - [X] Create Create User Page
-  - [X] Validate Input
-  - [X] Save User
-  - [X] Send Validation Code
-  - [X] Validate Working Code
-  - [X] Send to Profile Creator Page
-  - [ ] Validate Input @TODO:
-  - [ ] Save Profile and send to homepage
 - [ ] Log In User Route
   - [ ] Create Log In Page
   - [ ] Validate Input
@@ -25,16 +12,11 @@ RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
   - [ ] Validate Working Code
   - [ ] Log User in and sent to homepage
 - [ ] Read User Route
+  - [ ] Create Profile
 - [ ] Update User Route
+- [ ] Change Email
 - [ ] Delete User Route
 
-- [ ] Create Post Table and Routes
-
-- [ ] Refactor Activation Code to work with different actions @TODO:
+- [ ] Refactor Activation Code to work with different actions
 - [ ] Make email sign up easier
 - [ ] Reformat email
-
-- [ ] Create Follow Table and Routes
-- [ ] Create Like Table and Routes
-- [ ] Create Repost Table and Routes
-- [ ] Create Action Table and Routes (notifications)
