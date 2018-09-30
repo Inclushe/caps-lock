@@ -68,3 +68,44 @@ exports.createPost = (req, res) => {
       })
   }
 }
+
+exports.showPosts = (req, res) => {
+  if (req.params.page && !isNaN(Number(req.params.page)) && req.params.page >= 1) {
+    knex('post')
+      .orderBy('created_at', 'desc')
+      .limit(20)
+      .offset((req.params.page - 1) * 20)
+      .then((rows) => {
+        var results = rows.reduce((arr, value) => {
+          var prom = new Promise((resolve, reject) => {
+            knex('user')
+              .where({ id: value.user_id })
+              .first()
+              .then((user) => {
+                var post = {
+                  content: value.content,
+                  created_at: res.locals.dayjs(Number(value.created_at)).fromNow(),
+                  user: {
+                    name: user.name,
+                    avatarURL: 'https://www.gravatar.com/avatar/' + require('crypto').createHash('md5').update(user.email).digest('hex')
+                  }
+                }
+                resolve(post)
+              })
+              .catch((e) => {
+                reject(e)
+              })
+          })
+          arr.push(prom)
+          return arr
+        }, [])
+        return Promise.all(results)
+      })
+      .then((rows) => {
+        console.log(rows)
+        res.json({ posts: rows, error: false })
+      })
+  } else {
+    res.json({ error: true })
+  }
+}

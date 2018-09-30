@@ -47,17 +47,11 @@ exports.verifyCode = [
       .where({ code: value })
       .first()
       .then((code) => {
-        // Check if user matches user in db
-        knex('user')
-          .where({ id: code.user_id })
-          .first()
-          .then((user) => {
-            if (req.session.email !== user.email) {
-              return Promise.reject(new Error('INVALID CODE'))
-            }
-          })
         // Check if code expired (24 hours after creation)
         if (code.created_at < (Date.now() - 1000 * 60 * 60 * 24)) {
+          knex('verification_code')
+            .where({ code: value })
+            .first()
           return Promise.reject(new Error('CODE EXPIRED'))
         }
       })

@@ -38,10 +38,11 @@ exports.renderHomePage = (req, res) => {
   }
 }
 exports.renderSignUpPage = (req, res) => res.render('signUpPage')
+exports.renderLogInPage = (req, res) => res.render('logInPage')
 exports.viewPage = (req, res, next) =>
   !isProduction ? res.render(req.params.page) : next(404)
 
-exports.validateEmail = [
+exports.validateEmailSignUp = [
   check('email').isEmail().normalizeEmail().withMessage('NOT A VALID EMAIL'),
   check('email').custom(value => {
     return knex('user')
@@ -49,6 +50,19 @@ exports.validateEmail = [
       .then((rows) => {
         if (rows.length !== 0) {
           return Promise.reject(new Error('EMAIL ALREADY IN USE'))
+        }
+      })
+  })
+]
+
+exports.validateEmailLogIn = [
+  check('email').isEmail().normalizeEmail().withMessage('NOT A VALID EMAIL'),
+  check('email').custom(value => {
+    return knex('user')
+      .where({ email: value })
+      .then((rows) => {
+        if (rows.length === 0) {
+          return Promise.reject(new Error('NO USER HAS THIS EMAIL. <a href="/sign-up">SIGN UP HERE.</a>'))
         }
       })
   })

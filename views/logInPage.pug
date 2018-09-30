@@ -1,0 +1,18 @@
+extends layout
+
+include mixins/_formElement
+
+block content
+  h1.page-header LOG IN
+  h2.section-header
+    include ../public/images/icons/round-mail-24px.svg
+    span LOG IN USING YOUR EMAIL
+  form(method="POST").form
+    .row
+      +formElement({
+        type: "email",
+        name: "email",
+        title: "EMAIL ADDRESS",
+        placeholder: "my@email.com"
+      }, errors)
+      input(type="submit" id="emailSubmit" value="LOG IN ->").button.button--primary

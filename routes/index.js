@@ -10,12 +10,21 @@ router.post('/',
   postController.validatePost,
   postController.createPost
 )
+
 router.get('/sign-up', mainController.renderSignUpPage)
 router.post('/sign-up',
-  mainController.validateEmail,
+  mainController.validateEmailSignUp,
   userController.createUser,
   verificationCodeController.createCode
 )
+
+router.get('/log-in', mainController.renderLogInPage)
+router.post('/log-in',
+  mainController.validateEmailLogIn,
+  userController.getUserId,
+  verificationCodeController.createCode
+)
+
 router.get('/verify', verificationCodeController.renderVerifyPage)
 router.post('/verify',
   verificationCodeController.verifyCode,
@@ -29,6 +38,8 @@ router.post('/profile/create',
   userController.validateProfile,
   userController.createProfile
 )
+
+router.get('/post/:page', postController.showPosts)
 router.get('/test/:page', mainController.viewPage)
 
 module.exports = router

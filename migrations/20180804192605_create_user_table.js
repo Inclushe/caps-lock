@@ -9,6 +9,7 @@ exports.up = function (knex, Promise) {
     table.boolean('disabled').defaultTo(false).notNullable()
     table.bigInteger('created_at').unsigned().notNullable()
     table.bigInteger('updated_at').unsigned().notNullable()
+    table.unique(['id', 'name', 'email'])
   })
 }
 

@@ -81,3 +81,19 @@ exports.createProfile = (req, res, next) => {
       })
   }
 }
+
+exports.getUserId = (req, res, next) => {
+  var errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    console.log(errors.mapped())
+    res.render('logInPage', { errors: errors.mapped() })
+  } else {
+    knex('user')
+      .where({ email: req.body.email })
+      .first()
+      .then((user) => {
+        req.user_id = user.id
+        next()
+      })
+  }
+}

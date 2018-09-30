@@ -1,3 +1,5 @@
+include mixins/_post
+
 <!DOCTYPE html>
 html(lang="en")
   head
@@ -22,9 +24,13 @@ html(lang="en")
           a(href="/")
             include ../public/images/logo.svg
         .buttons
-          if !user && !email
-            button.button.button--secondary LOG IN
+          if !user && !email && !(path == '/log-in') && !(path == '/sign-up')
+            a(href="/log-in")
+              button.button.button--secondary LOG IN
           if user && user.activated
+            div.avi-aside
+              p POSTING AS
+              a(href=`/user/${user.name}`)= user.name
             img.avatar(src=user.avatarURL, srcset=`${user.avatarURL+'?s=64&d=mp'} 1x, ${user.avatarURL+'?s=128&d=mp'} 2x`)
       main.layout-container__content
         block content
@@ -33,6 +39,17 @@ html(lang="en")
         pre.code= JSON.stringify(user, null, 2)
         pre.code= JSON.stringify(email, null, 2)
         pre.code= JSON.stringify(errors, null, 2)
+        
+        pre.code= path
         div.project-status WIP
     .background-gradient
+    #postTemplate(style="display: none")
+      +post({
+        content: '{{ content }}',
+        created_at: '{{ created_at }}',
+        user: {
+          name: '{{ name }}',
+          avatarURL: '{{ avatarURL }}'
+        }
+      })
     script(src="/public/scripts/index.js")

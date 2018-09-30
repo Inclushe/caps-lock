@@ -1,3 +1,6 @@
+var dayjs = require('dayjs')
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 var express = require('express')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
@@ -8,7 +11,7 @@ var KnexSessionStore = require('connect-session-knex')(session)
 var expressValidator = require('express-validator')
 var morgan = require('morgan')
 var compression = require('compression')
-var routes = require('./routes/index')
+var routes = require('./routes')
 require('dotenv').config({ path: './vars.env' })
 var isProduction = process.env.NODE_ENV === 'production'
 var app = express()
@@ -49,6 +52,8 @@ app.use((req, res, next) => {
   res.locals.email = req.session.email
   console.log({ id: req.session.user })
   res.locals.user = null
+  res.locals.path = req.path
+  res.locals.dayjs = dayjs
   if (req.session.user) {
     knex('user').where({ id: req.session.user }).first().then(user => {
       if (user) {

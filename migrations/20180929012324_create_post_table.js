@@ -6,6 +6,7 @@ exports.up = function (knex, Promise) {
     table.string('content').notNullable()
     table.bigInteger('created_at').unsigned().notNullable()
     table.bigInteger('updated_at').unsigned().notNullable()
+    table.unique('id')
   })
 }
 
