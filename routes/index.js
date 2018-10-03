@@ -38,6 +38,7 @@ router.post('/profile/create',
   userController.validateProfile,
   userController.createProfile
 )
+router.get('/user/:user', userController.showProfile)
 
 router.get('/post/:page', postController.showPosts)
 router.get('/test/:page', mainController.viewPage)

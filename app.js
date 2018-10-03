@@ -78,14 +78,14 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // console.log(err.stack)
   res.status(err.status || 500)
-  if (!isProduction) {
-    res.json({ 'errors': {
-      message: err.message,
-      error: err
-    } })
-  } else {
-    res.send(err.message)
-  }
+  res.render('error', {
+    errors: {
+      message: err && err.message ? err.message : '',
+      error: err || '',
+      stack: err && err.stack ? err.stack : ''
+    },
+    code: err.status || 500
+  })
 })
 
 module.exports = app

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= code
+  if (code == 404)
+    h2 The page was not found.
+  else if (code == 500)
+    h2 There was a server error.
+  else
+    h2 An error occurred.
+  if process.env.NODE_ENV === 'development'
+    pre.code= errors.stack

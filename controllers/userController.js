@@ -97,3 +97,7 @@ exports.getUserId = (req, res, next) => {
       })
   }
 }
+
+exports.showProfile = (req, res) => {
+  res.render('profile', { user: req.params.user })
+}
