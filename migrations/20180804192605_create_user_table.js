@@ -2,7 +2,7 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('user', (table) => {
     table.uuid('id').primary().notNullable()
     table.string('name')
-    table.string('description')
+    table.string('description', 1000)
     table.string('email').notNullable()
     table.boolean('activated').defaultTo(false).notNullable()
     table.boolean('setup').defaultTo(false).notNullable()

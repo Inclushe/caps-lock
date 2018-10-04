@@ -44,6 +44,7 @@ exports.viewPage = (req, res, next) =>
 
 exports.validateEmailSignUp = [
   check('email').isEmail().normalizeEmail().withMessage('NOT A VALID EMAIL'),
+  check('email').isLength({ max: 255 }).withMessage('EMAIL TOO LONG'),
   check('email').custom(value => {
     return knex('user')
       .where({ email: value })
@@ -56,6 +57,7 @@ exports.validateEmailSignUp = [
 ]
 
 exports.loggedIn = (req, res, next) => (req.session.user === undefined) ? res.redirect('/') : next()
+exports.alreadyLoggedIn = (req, res, next) => (req.session.user !== undefined) ? res.redirect('/') : next()
 
 exports.validateEmailLogIn = [
   check('email').isEmail().normalizeEmail().withMessage('NOT A VALID EMAIL'),

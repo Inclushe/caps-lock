@@ -22,8 +22,22 @@ exports.createCode = (req, res, next) => {
           email: req.body.email
         },
         subject: 'CAPS LOCK: Verification Code',
-        html: `<h1>Code is ${code}</h1>`,
-        text: `Code is ${code}`
+        html: `<img src="${req.protocol + '://' + req.get('host')}/public/images/logo.png" height="160" width="192" />
+        <h1 style="font-family:sans-serif;">VERIFICATION CODE</h1>
+        <p style="font-family:sans-serif;">To verify your email, enter this code or click the button below: <span style="font-family:monospace;">${code}</span></p>
+        <div><!--[if mso]>
+          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${req.protocol + '://' + req.get('host')}/verify/${code}" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="10%" strokecolor="#1e3650" fillcolor="#00d16c">
+            <w:anchorlock/>
+            <center style="color:#ffffff;font-family:monospace;font-size:13px;font-weight:bold;">VERIFY ACCOUNT</center>
+          </v:roundrect>
+        <![endif]--><a href="${req.protocol + '://' + req.get('host')}/verify/${code}"
+        style="background-color:#00d16c;border:1px solid #1e3650;border-radius:4px;color:#ffffff;display:inline-block;font-family:monospace;font-size:13px;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;mso-hide:all;">VERIFY ACCOUNT</a></div>
+        `,
+        text: `CAPS LOCK
+        VERIFICATION CODE
+        To verify your email, enter this code or enter the URL below: ${code}
+        ${req.protocol + '://' + req.get('host')}/verify/${code}
+        `
       })
     })
     .then(() => {
@@ -45,18 +59,28 @@ exports.verifyCode = [
   check('verificationCode').custom((value, { req }) => {
     return knex('verification_code')
       .where({ code: value })
-      .first()
-      .then((code) => {
+      .then((rows) => {
+        if (rows.length === 0) {
+          return Promise.reject(new Error('INVALID CODE'))
+        }
         // Check if code expired (24 hours after creation)
-        if (code.created_at < (Date.now() - 1000 * 60 * 60 * 24)) {
+        if (rows[0].created_at < (Date.now() - 1000 * 60 * 60 * 24)) {
           knex('verification_code')
             .where({ code: value })
             .first()
-          return Promise.reject(new Error('CODE EXPIRED'))
+            .del()
+            .then(() => {
+              return Promise.reject(new Error('CODE EXPIRED'))
+            })
         }
       })
   })
 ]
+
+exports.paramToBody = (req, res, next) => {
+  req.body.verificationCode = req.params.code
+  next()
+}
 
 exports.runAction = (req, res, next) => {
   var errors = validationResult(req)

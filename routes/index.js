@@ -7,26 +7,39 @@ var postController = require('../controllers/postController')
 
 router.get('/', mainController.renderHomePage)
 router.post('/',
+  mainController.loggedIn,
   postController.validatePost,
   postController.createPost
 )
 
-router.get('/sign-up', mainController.renderSignUpPage)
+router.get('/sign-up', mainController.alreadyLoggedIn, mainController.renderSignUpPage)
 router.post('/sign-up',
+  mainController.alreadyLoggedIn,
   mainController.validateEmailSignUp,
   userController.createUser,
   verificationCodeController.createCode
 )
 
-router.get('/log-in', mainController.renderLogInPage)
+router.get('/log-in', mainController.alreadyLoggedIn, mainController.renderLogInPage)
 router.post('/log-in',
+  mainController.alreadyLoggedIn,
   mainController.validateEmailLogIn,
   userController.getUserId,
   verificationCodeController.createCode
 )
 
-router.get('/verify', verificationCodeController.renderVerifyPage)
+router.get('/verify',
+  mainController.alreadyLoggedIn,
+  verificationCodeController.renderVerifyPage
+)
+router.get('/verify/:code',
+  mainController.alreadyLoggedIn,
+  verificationCodeController.paramToBody,
+  verificationCodeController.verifyCode,
+  verificationCodeController.runAction
+)
 router.post('/verify',
+  mainController.alreadyLoggedIn,
   verificationCodeController.verifyCode,
   verificationCodeController.runAction
 )

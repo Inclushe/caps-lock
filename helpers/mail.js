@@ -1,8 +1,10 @@
 var nodemailer = require('nodemailer')
-var pug = require('pug')
-var util = require('util')
-var promisify = util.promisify
+var sgMail = require('@sendgrid/mail')
+var isProduction = process.env.NODE_ENV === 'production'
 
+if (isProduction) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+}
 var transport = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',
   port: 2525,
@@ -13,11 +15,16 @@ var transport = nodemailer.createTransport({
 })
 
 exports.send = (options) => {
-  return transport.sendMail({
-    from: 'Caps Lock <noreply@capslo.ck>',
+  var message = {
+    from: 'CAPS LOCK <verify@capslock.inclushe.com>',
     to: options.user.email,
     subject: options.subject,
     html: options.html,
     text: options.text
-  })
+  }
+  if (isProduction) {
+    return sgMail.send(message)
+  } else {
+    return transport.sendMail(message)
+  }
 }
