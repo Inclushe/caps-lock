@@ -49,11 +49,13 @@ exports.validateEmailSignUp = [
       .where({ email: value })
       .then((rows) => {
         if (rows.length !== 0) {
-          return Promise.reject(new Error('EMAIL ALREADY IN USE'))
+          return Promise.reject(new Error('EMAIL ALREADY IN USE. <a href="/log-in">LOG IN HERE.</a>'))
         }
       })
   })
 ]
+
+exports.loggedIn = (req, res, next) => (req.session.user === undefined) ? res.redirect('/') : next()
 
 exports.validateEmailLogIn = [
   check('email').isEmail().normalizeEmail().withMessage('NOT A VALID EMAIL'),

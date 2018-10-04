@@ -31,14 +31,26 @@ router.post('/verify',
   verificationCodeController.runAction
 )
 router.get('/profile/create',
+  mainController.loggedIn,
   userController.isNotSetup,
   userController.renderProfileCreatePage
 )
 router.post('/profile/create',
+  mainController.loggedIn,
   userController.validateProfile,
   userController.createProfile
 )
-router.get('/user/:user', userController.showProfile)
+router.get('/profile/edit',
+  mainController.loggedIn,
+  userController.showSettings
+)
+router.post('/profile/edit',
+  mainController.loggedIn,
+  userController.validateDescription,
+  userController.updateProfile
+)
+router.get('/user/:user', mainController.loggedIn, userController.showProfile)
+router.get('/log-out', mainController.loggedIn, userController.logOut)
 
 router.get('/post/:page', postController.showPosts)
 router.get('/test/:page', mainController.viewPage)

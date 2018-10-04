@@ -3,7 +3,10 @@ extends layout
 include mixins/_formElement
 
 block content
-  h1.page-header SET UP YOUR PROFILE
+  h1.page-header SETTINGS
+  h2.section-header
+    include ../public/images/icons/round-people-24px.svg
+    span EDIT YOUR PROFILE
   form.form(method="POST")
     .profile-editor-block
       .profile-editor__avatar-block
@@ -19,19 +22,10 @@ block content
             a(href="https://gravatar.com" target="_blank" rel="noopener") CHANGE YOUR GRAVATAR ->
       .profile-editor__input-block
         +formElement({
-          type: "username",
-          name: "username",
-          title: "USERNAME",
-          placeholder: "GOOD USERNAME",
-          uppercase: true,
-          monospace: true,
-          spellcheck: false
-        }, errors)
-        +formElement({
           type: "textarea",
           name: "description",
           title: "DESCRIPTION",
           placeholder: "GOOD DESCRIPTION",
           uppercase: true
         }, errors)
-        input(type="submit" id="editSubmit" value="FINISH PROFILE ->").button.button--primary
+        input(type="submit" id="editSubmit" value="UPDATE PROFILE ->").button.button--primary

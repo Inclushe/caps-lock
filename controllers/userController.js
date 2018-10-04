@@ -98,6 +98,79 @@ exports.getUserId = (req, res, next) => {
   }
 }
 
-exports.showProfile = (req, res) => {
-  res.render('profile', { user: req.params.user })
+exports.showProfile = (req, res, next) => {
+  knex('user')
+    .where({ name: req.params.user.toUpperCase() })
+    .then((user) => {
+      if (user.length === 0) {
+        next()
+      } else {
+        knex('post')
+          .where({ user_id: user[0].id })
+          .orderBy('created_at', 'desc')
+          .then((rows) => {
+            var results = rows.reduce((arr, value) => {
+              var prom = new Promise((resolve, reject) => {
+                knex('user')
+                  .where({ id: value.user_id })
+                  .first()
+                  .then((user) => {
+                    value.user = user
+                    value.user['avatarURL'] = 'https://www.gravatar.com/avatar/' + require('crypto').createHash('md5').update(user.email).digest('hex')
+                    resolve(value)
+                  })
+                  .catch((e) => {
+                    reject(e)
+                  })
+              })
+              arr.push(prom)
+              return arr
+            }, [])
+            return Promise.all(results)
+          })
+          .then((rows) => {
+            console.log(rows)
+            user[0]['avatarURL'] = 'https://www.gravatar.com/avatar/' + require('crypto').createHash('md5').update(user[0].email).digest('hex')
+            res.render('profile', { profileUser: user[0], posts: rows })
+          })
+      }
+    })
+    .catch((e) => {
+      console.error(e)
+      next(e)
+    })
+}
+
+exports.showSettings = (req, res) => res.render('settings')
+
+exports.validateDescription = [
+  check('description').trim().isLength({ min: 0, max: 1000 }).withMessage('DESCRIPTION IS OVER 1000 CHARACTERS')
+]
+
+exports.updateProfile = (req, res, next) => {
+  var errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    console.log(errors.mapped())
+    res.render('settings', { errors: errors.mapped() })
+  } else {
+    knex('user')
+      .where({ id: req.session.user })
+      .update({
+        description: req.body.description,
+        updated_at: Date.now()
+      })
+      .then(() => {
+        res.redirect(`/user/${res.locals.user.name}`)
+      })
+      .catch((e) => {
+        console.error(e)
+        next(e)
+      })
+  }
+}
+
+exports.logOut = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/')
+  })
 }

@@ -1,5 +1,20 @@
 extends layout
 
 block content
-  h1 Test
-  h2= user
+  .profile
+    .profile__avatar_block
+      img.avatar(src=profileUser.avatarURL, srcset=`${profileUser.avatarURL+'?s=192&d=mp'} 1x, ${profileUser.avatarURL+'?s=384&d=mp'} 2x`)
+    .profile__description_block
+      h2.profile__name= profileUser.name
+      p.profile__description= profileUser.description.toUpperCase()
+      if (profileUser.name == user.name)
+        a(href="/profile/edit")
+          h3 EDIT PROFILE ->
+        a(href="/log-out")
+          h3 LOG OUT ->
+      p.profile__settings
+  div.post-container
+    if posts
+      each post in posts
+        +post(post)
+  pre.code= JSON.stringify(profileUser, null, 2)
