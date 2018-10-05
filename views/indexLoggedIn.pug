@@ -10,7 +10,9 @@ block content
       name: "content",
       title: "POST CONTENT",
       uppercase: true,
-      showErrors: false
+      showErrors: false,
+      min: 1,
+      max: 1000
     }, errors)
     div.row
       p.form-element__error-text= errors && errors["postContent"] ? errors["postContent"].msg : ""

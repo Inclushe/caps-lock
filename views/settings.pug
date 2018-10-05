@@ -26,6 +26,8 @@ block content
           name: "description",
           title: "DESCRIPTION",
           placeholder: "GOOD DESCRIPTION",
-          uppercase: true
+          uppercase: true,
+          min: 0,
+          max: 1000
         }, errors)
         input(type="submit" id="editSubmit" value="UPDATE PROFILE ->").button.button--primary

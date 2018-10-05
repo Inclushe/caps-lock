@@ -21,10 +21,10 @@ exports.createCode = (req, res, next) => {
         user: {
           email: req.body.email
         },
-        subject: 'CAPS LOCK: Verification Code',
+        subject: 'CAPS LOCK: VERIFICATION CODE',
         html: `<img src="${req.protocol + '://' + req.get('host')}/public/images/logo.png" height="160" width="192" />
         <h1 style="font-family:sans-serif;">VERIFICATION CODE</h1>
-        <p style="font-family:sans-serif;">To verify your email, enter this code or click the button below: <span style="font-family:monospace;">${code}</span></p>
+        <p style="font-family:sans-serif;">TO VERIFY YOUR EMAIL, ENTER THIS CODE OR CLICK THE BUTTON BELOW: <span style="font-family:monospace;">${code}</span></p>
         <div><!--[if mso]>
           <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${req.protocol + '://' + req.get('host')}/verify/${code}" style="height:40px;v-text-anchor:middle;width:150px;" arcsize="10%" strokecolor="#1e3650" fillcolor="#00d16c">
             <w:anchorlock/>
@@ -32,11 +32,15 @@ exports.createCode = (req, res, next) => {
           </v:roundrect>
         <![endif]--><a href="${req.protocol + '://' + req.get('host')}/verify/${code}"
         style="background-color:#00d16c;border:1px solid #1e3650;border-radius:4px;color:#ffffff;display:inline-block;font-family:monospace;font-size:13px;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;mso-hide:all;">VERIFY ACCOUNT</a></div>
+        
+        <p style="font-family:sans-serif;color:#666666">IF YOU DIDN'T REQUEST THIS, YOU CAN SAFELY IGNORE THIS MESSAGE</p>
         `,
         text: `CAPS LOCK
         VERIFICATION CODE
-        To verify your email, enter this code or enter the URL below: ${code}
+        TO VERIFY YOUR EMAIL, ENTER THIS CODE OR ENTER THE URL BELOW: ${code}
         ${req.protocol + '://' + req.get('host')}/verify/${code}
+
+        IF YOU DIDN'T REQUEST THIS, YOU CAN SAFELY IGNORE THIS MESSAGE
         `
       })
     })

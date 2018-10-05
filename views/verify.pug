@@ -16,6 +16,8 @@ block content
         title: "VERIFICATION CODE",
         placeholder: "########-####-####-####-############",
         monospace: true,
-        autocomplete: "off"
+        autocomplete: "off",
+        min: 36,
+        max: 36
       }, errors)
       input(type="submit" id="verifySubmit" value="VERIFY ->").button.button--primary

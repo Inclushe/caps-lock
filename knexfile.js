@@ -11,10 +11,6 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: {
-      database: 'capslock',
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS
-    }
+    connection: process.env.DATABASE_URL
   }
 }

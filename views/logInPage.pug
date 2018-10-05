@@ -13,6 +13,8 @@ block content
         type: "email",
         name: "email",
         title: "EMAIL ADDRESS",
-        placeholder: "my@email.com"
+        placeholder: "my@email.com",
+        min: 1,
+        max: 255
       }, errors)
       input(type="submit" id="emailSubmit" value="LOG IN ->").button.button--primary

@@ -10,12 +10,23 @@ exports.validatePost = [
       .then((rows) => {
         if (rows.length === 0) {
           return Promise.reject(new Error('USER DOES NOT EXIST'))
-        }
-        if (rows[0].disabled) {
-          return Promise.reject(new Error('USER CANNOT POST'))
-        }
-        if (!rows[0].activated || !rows[0].setup) {
-          return Promise.reject(new Error('USER CANNOT POST'))
+        } else {
+          return knex('post')
+            .orderBy('created_at', 'desc')
+            .where({ user_id: rows[0].id })
+            .then((post) => {
+              if (post.length !== 0) {
+                if ((Number(Date.now()) - Number(post[0].created_at)) < 10000) {
+                  return Promise.reject(new Error('STOP POSTING SO QUICKLY!'))
+                }
+              }
+              if (rows[0].disabled) {
+                return Promise.reject(new Error('USER CANNOT POST'))
+              }
+              if (!rows[0].activated || !rows[0].setup) {
+                return Promise.reject(new Error('USER CANNOT POST'))
+              }
+            })
         }
       })
   }),
@@ -51,7 +62,7 @@ exports.createPost = (req, res) => {
         return Promise.all(results)
       })
       .then((rows) => {
-        console.log(rows)
+        // console.log(rows)
         res.render('indexLoggedIn', { errors: errors.mapped(), posts: rows })
       })
   } else {
@@ -102,7 +113,7 @@ exports.showPosts = (req, res) => {
         return Promise.all(results)
       })
       .then((rows) => {
-        console.log(rows)
+        // console.log(rows)
         res.json({ posts: rows, error: false })
       })
   } else {

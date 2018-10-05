@@ -32,7 +32,7 @@ exports.renderHomePage = (req, res) => {
         return Promise.all(results)
       })
       .then((rows) => {
-        console.log(rows)
+        // console.log(rows)
         res.render('indexLoggedIn', { posts: rows })
       })
   }
@@ -43,7 +43,13 @@ exports.viewPage = (req, res, next) =>
   !isProduction ? res.render(req.params.page) : next(404)
 
 exports.validateEmailSignUp = [
-  check('email').isEmail().normalizeEmail().withMessage('NOT A VALID EMAIL'),
+  check('email').isEmail().normalizeEmail({
+    gmail_remove_subaddress: false,
+    gmail_remove_dots: false,
+    outlookdotcom_remove_subaddress: false,
+    yahoo_remove_subaddress: false,
+    icloud_remove_subaddress: false
+  }).withMessage('NOT A VALID EMAIL'),
   check('email').isLength({ max: 255 }).withMessage('EMAIL TOO LONG'),
   check('email').custom(value => {
     return knex('user')
@@ -60,7 +66,13 @@ exports.loggedIn = (req, res, next) => (req.session.user === undefined) ? res.re
 exports.alreadyLoggedIn = (req, res, next) => (req.session.user !== undefined) ? res.redirect('/') : next()
 
 exports.validateEmailLogIn = [
-  check('email').isEmail().normalizeEmail().withMessage('NOT A VALID EMAIL'),
+  check('email').isEmail().normalizeEmail({
+    gmail_remove_subaddress: false,
+    gmail_remove_dots: false,
+    outlookdotcom_remove_subaddress: false,
+    yahoo_remove_subaddress: false,
+    icloud_remove_subaddress: false
+  }).withMessage('NOT A VALID EMAIL'),
   check('email').custom(value => {
     return knex('user')
       .where({ email: value })

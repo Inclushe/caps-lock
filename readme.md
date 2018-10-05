@@ -2,11 +2,16 @@
 
 RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
-## @TODO:
+## Installation
 
-- [X] Make email sign up easier
-- [X] Reformat email
-- [X] Fix links on home page
-- [ ] Fix CSS on phones
-
-- [ ] Profanity filter
+Postgres & Node
+```bash
+git clone
+npm i
+heroku create
+git push heroku master
+heroku addons:create heroku-postgresql:hobby-dev
+heroku config:set SESSION_SECRET=$(openssl rand -hex 512)
+heroku config:set SENDGRID_API_KEY=<SENDGRID KEY>
+heroku run npm run migrate
+```

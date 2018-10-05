@@ -16,6 +16,7 @@ body
   background-attachment: fixed
   background-repeat: repeat
   background-position: center
+  overflow-x: hidden
 
 .layout-container
   margin: 0 auto
@@ -183,3 +184,14 @@ pre.code
 @media only screen and (max-width: 700px)
   .layout-container
     padding: 16px 32px
+  .profile-editor-block
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    .profile-editor__avatar-block
+      margin-right: 0
+      img.avatar
+        height: 96px
+        width: 96px
+  ul
+    margin-top: 32px
