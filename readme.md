@@ -1,5 +1,7 @@
 # CAPS LOCK
 
+![Caps lock site screenshot with text: RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS, ALL CAPS ONLY](capslock.png)
+
 RANT OR RAVE IN A THOUSAND CHARACTERS OR LESS
 
 ## Installation
