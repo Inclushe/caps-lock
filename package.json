@@ -1,38 +1,38 @@
 {
-  "name": "caps-lock",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "migrate": "knex migrate:latest",
-    "rollback": "knex migrate:rollback"
-  },
-  "author": "Ethan <inclushe@gmail.com>",
-  "license": "ISC",
-  "dependencies": {
-    "@sendgrid/mail": "^6.3.1",
-    "body-parser": "^1.18.3",
-    "compression": "^1.7.3",
-    "connect-session-knex": "^1.4.0",
-    "cookie-parser": "^1.4.3",
-    "dayjs": "^1.7.7",
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "express-validator": "^5.3.0",
-    "knex": "^0.15.2",
-    "morgan": "^1.9.0",
-    "nodemailer": "^4.6.7",
-    "pg": "^7.4.3",
-    "pug": "^2.0.3",
-    "serve-favicon": "^2.5.0",
-    "stylus": "^0.54.5",
-    "uuid": "^3.3.2"
-  },
-  "engines": {
-    "node": "10.7.0"
-  }
+	"name": "caps-lock",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js",
+		"dev": "nodemon index.js",
+		"migrate": "knex migrate:latest",
+		"rollback": "knex migrate:rollback"
+	},
+	"author": "Ethan <inclushe@gmail.com>",
+	"license": "ISC",
+	"dependencies": {
+		"@sendgrid/mail": "^6.3.1",
+		"body-parser": "^1.18.3",
+		"compression": "^1.7.3",
+		"connect-session-knex": "^1.4.0",
+		"cookie-parser": "^1.4.3",
+		"dayjs": "^1.7.7",
+		"dotenv": "^6.0.0",
+		"express": "^4.16.3",
+		"express-session": "^1.15.6",
+		"express-validator": "^5.3.0",
+		"knex": "^0.15.2",
+		"morgan": "^1.9.0",
+		"nodemailer": "^4.6.7",
+		"pg": "^7.4.3",
+		"pug": "^2.0.3",
+		"serve-favicon": "^2.5.0",
+		"stylus": "^0.54.5",
+		"uuid": "^3.3.2"
+	},
+	"engines": {
+		"node": "10.7.0"
+	}
 }
